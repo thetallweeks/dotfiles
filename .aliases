@@ -1,0 +1,15 @@
+## Edit Aliases
+alias editAliases='sudo nano ~/.aliases';
+
+## Show or Hide Hidden Files
+alias showHiddenFiles='defaults write com.apple.finder AppleShowAllFiles TRUE';
+alias hideHiddenFiles='defaults write com.apple.finder AppleShowAllFiles FALSE';
+
+## Directory Shortcuts
+alias projects='cd ~/Projects';
+alias dropbox='cd /Users/kevinweeks/Dropbox';
+alias desktop='cd ~/Desktop';
+alias downloads='cd ~/Downloads';
+
+## Git
+alias gs='git status';
