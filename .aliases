@@ -21,5 +21,5 @@ alias pop='git stash pop'
 alias pull='git pull origin "$(git rev-parse --abbrev-ref HEAD)"'
 alias pullr='git pull --rebase origin master'
 alias push='git push origin "$(git rev-parse --abbrev-ref HEAD)"'
-alias pushr='git push origin "$(git rev-parse --abbrev-ref HEAD)":refs/for/"$(g$
+alias pushr='git push origin "$(git rev-parse --abbrev-ref HEAD)":refs/for/"$(git rev-parse --abbrev-ref HEAD)"'
 alias stash='git stash'
