@@ -12,4 +12,14 @@ alias desktop='cd ~/Desktop';
 alias downloads='cd ~/Downloads';
 
 ## Git
-alias gs='git status';
+alias gb='git branch'
+alias gc='git checkout'
+alias gd='git log -1 --format="%an %ae%n%cn %ce"'
+alias gl='git log'
+alias gs='git status'
+alias pop='git stash pop'
+alias pull='git pull origin "$(git rev-parse --abbrev-ref HEAD)"'
+alias pullr='git pull --rebase origin master'
+alias push='git push origin "$(git rev-parse --abbrev-ref HEAD)"'
+alias pushr='git push origin "$(git rev-parse --abbrev-ref HEAD)":refs/for/"$(g$
+alias stash='git stash'
