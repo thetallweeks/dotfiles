@@ -11,7 +11,6 @@ for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
 done;
 unset file;
 
-
 # Set up rbenv
 eval "$(rbenv init -)"
 
@@ -19,3 +18,6 @@ eval "$(rbenv init -)"
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
 fi
+
+# Set directory for homebrew cask
+export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/Caskroom"

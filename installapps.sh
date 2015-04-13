@@ -6,6 +6,7 @@ brew cask install 1password
 brew cask install dropbox
 brew cask install vlc
 brew cask install camtasia
+brew cask install sketch
 
 # Browsers
 brew cask install google-chrome
