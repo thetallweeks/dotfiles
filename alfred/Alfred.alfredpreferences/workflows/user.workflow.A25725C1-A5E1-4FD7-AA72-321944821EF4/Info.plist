@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.petrmanas.btwifitoggle</string>
+	<key>category</key>
+	<string>Tools</string>
+	<key>connections</key>
+	<dict>
+		<key>0ECB85A1-FE72-47A4-BD3D-A77DDDC6D3BB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F480DD5B-678F-498C-825E-AF6F6ADDE71C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>26C01B6A-F7B6-4277-B305-2867F9C0E9F5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F480DD5B-678F-498C-825E-AF6F6ADDE71C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>439062A2-EB94-4E0E-90CA-CCE6C4FD55B2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F480DD5B-678F-498C-825E-AF6F6ADDE71C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>CC03AE94-5C44-4388-A818-FD7EF924848B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C4FBD917-A521-413B-840D-4FDFDC78B657</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>CF001614-D38A-4085-82D9-1C66C955A7CD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C4FBD917-A521-413B-840D-4FDFDC78B657</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Petr Manas</string>
+	<key>description</key>
+	<string>Toggle Bluetooth and Wifi</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>BT &amp; Wifi Toggle</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>#!/bin/bash
+if [ "$(./blueutil status)" = "Status: on" ]
+then
+	./blueutil off
+else
+	./blueutil on
+fi</string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>F480DD5B-678F-498C-825E-AF6F6ADDE71C</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>bluetooth</string>
+				<key>text</key>
+				<string>Toggle bluetooth</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>0ECB85A1-FE72-47A4-BD3D-A77DDDC6D3BB</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>applescript</key>
+				<string>on alfred_script(q)
+	set wifi to (do shell script "networksetup -listallhardwareports | grep -A 1 Wi-Fi | tail -n 1 | cut -b 9-12")
+	if (offset of "On" in (do shell script "networksetup -getairportpower " &amp; wifi &amp; " ")) &gt; 0 then
+		do shell script "networksetup -setairportpower " &amp; wifi &amp; " off"
+	else
+		do shell script "networksetup -setairportpower " &amp; wifi &amp; " on"
+	end if
+end alfred_script</string>
+				<key>cachescript</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.applescript</string>
+			<key>uid</key>
+			<string>C4FBD917-A521-413B-840D-4FDFDC78B657</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>keyword</key>
+				<string>bt</string>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>getting bluetooth status...</string>
+				<key>script</key>
+				<string>BT=$(./blueutil status)
+
+cat &lt;&lt; EOB
+&lt;?xml version="1.0"?&gt;
+&lt;items&gt;
+
+&lt;item uid="com.petrmanas.btwftoggle" arg="$BT" valid="yes" type="file"&gt;
+&lt;title&gt;Toggle Bluetooth&lt;/title&gt;
+&lt;subtitle&gt;$BT&lt;/subtitle&gt;
+&lt;icon type="file"&gt;icon.png&lt;/icon&gt;
+&lt;/item&gt;
+
+&lt;/items&gt;
+
+EOB</string>
+				<key>title</key>
+				<string>Toggle Bluetooth</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>439062A2-EB94-4E0E-90CA-CCE6C4FD55B2</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>hotkey</key>
+				<integer>11</integer>
+				<key>hotmod</key>
+				<integer>1835008</integer>
+				<key>hotstring</key>
+				<string>B</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>26C01B6A-F7B6-4277-B305-2867F9C0E9F5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>wifi</string>
+				<key>text</key>
+				<string>Toggle wifi</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>CF001614-D38A-4085-82D9-1C66C955A7CD</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>hotkey</key>
+				<integer>13</integer>
+				<key>hotmod</key>
+				<integer>1835008</integer>
+				<key>hotstring</key>
+				<string>W</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>CC03AE94-5C44-4388-A818-FD7EF924848B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>0ECB85A1-FE72-47A4-BD3D-A77DDDC6D3BB</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
+		<key>26C01B6A-F7B6-4277-B305-2867F9C0E9F5</key>
+		<dict>
+			<key>ypos</key>
+			<real>190</real>
+		</dict>
+		<key>439062A2-EB94-4E0E-90CA-CCE6C4FD55B2</key>
+		<dict>
+			<key>ypos</key>
+			<real>130</real>
+		</dict>
+		<key>C4FBD917-A521-413B-840D-4FDFDC78B657</key>
+		<dict>
+			<key>ypos</key>
+			<real>130</real>
+		</dict>
+		<key>CC03AE94-5C44-4388-A818-FD7EF924848B</key>
+		<dict>
+			<key>ypos</key>
+			<real>350</real>
+		</dict>
+		<key>CF001614-D38A-4085-82D9-1C66C955A7CD</key>
+		<dict>
+			<key>ypos</key>
+			<real>250</real>
+		</dict>
+		<key>F480DD5B-678F-498C-825E-AF6F6ADDE71C</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string>petrmanas.name</string>
+</dict>
+</plist>
